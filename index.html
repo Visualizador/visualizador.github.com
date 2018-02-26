@@ -1,0 +1,1548 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet-src.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/mun_toluca_0.js"></script>
+        <script src="data/agebs_toluca_1.js"></script>
+        <script src="data/GastoPromedioMensualenSalud_2.js"></script>
+        <script src="data/Factorial_3.js"></script>
+        <script src="data/GastoPromedioMensualenCereales_4.js"></script>
+        <script src="data/GastoPromedioMensualenVerduras_5.js"></script>
+        <script src="data/GastoPromedioMensualenFrutas_6.js"></script>
+        <script src="data/NSE_7.js"></script>
+        <script src="data/DensidaddeAtractores_8.js"></script>
+        <script src="data/GradoPromedioEscolar_9.js"></script>
+        <script src="data/DensidaddePoblacin18aosyms_10.js"></script>
+        <script src="data/repulsor_11.js"></script>
+        <script src="data/competidor_12.js"></script>
+        <script src="data/atractor_13.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[19.0965266771,-99.9975455088],[19.4914003526,-99.3155518218]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://a.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash;Map data: &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        var basemap1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap1.addTo(map);
+        function setBounds() {
+        }
+        function pop_mun_toluca_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CVE_ENT'] !== null ? Autolinker.link(String(feature.properties['CVE_ENT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CVE_MUN'] !== null ? Autolinker.link(String(feature.properties['CVE_MUN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_MUN'] !== null ? Autolinker.link(String(feature.properties['NOM_MUN'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_mun_toluca_0_0() {
+            return {
+                pane: 'pane_mun_toluca_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.6)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,203,203,0.6)',
+            }
+        }
+        map.createPane('pane_mun_toluca_0');
+        map.getPane('pane_mun_toluca_0').style.zIndex = 400;
+        map.getPane('pane_mun_toluca_0').style['mix-blend-mode'] = 'normal';
+        var layer_mun_toluca_0 = new L.geoJson(json_mun_toluca_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_mun_toluca_0',
+            onEachFeature: pop_mun_toluca_0,
+            style: style_mun_toluca_0_0,
+        });
+        bounds_group.addLayer(layer_mun_toluca_0);
+        map.addLayer(layer_mun_toluca_0);
+        function pop_agebs_toluca_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>localidad</strong><br />' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_agebs_toluca_1_0() {
+            return {
+                pane: 'pane_agebs_toluca_1',
+                opacity: 1,
+                color: 'rgba(202,202,202,0.4)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,176,12,0.0)',
+            }
+        }
+        map.createPane('pane_agebs_toluca_1');
+        map.getPane('pane_agebs_toluca_1').style.zIndex = 401;
+        map.getPane('pane_agebs_toluca_1').style['mix-blend-mode'] = 'normal';
+        var layer_agebs_toluca_1 = new L.geoJson(json_agebs_toluca_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_agebs_toluca_1',
+            onEachFeature: pop_agebs_toluca_1,
+            style: style_agebs_toluca_1_0,
+        });
+        bounds_group.addLayer(layer_agebs_toluca_1);
+        map.addLayer(layer_agebs_toluca_1);
+        function pop_GastoPromedioMensualenSalud_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gsalud'] !== null ? Autolinker.link(String(feature.properties['gsalud'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GastoPromedioMensualenSalud_2_0(feature) {
+            if (feature.properties['gsalud'] >= 0.000000 && feature.properties['gsalud'] <= 115000.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenSalud_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.61)',
+            }
+            }
+            if (feature.properties['gsalud'] >= 115000.000000 && feature.properties['gsalud'] <= 312493.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenSalud_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.61)',
+            }
+            }
+            if (feature.properties['gsalud'] >= 312493.330000 && feature.properties['gsalud'] <= 687971.670000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenSalud_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.61)',
+            }
+            }
+            if (feature.properties['gsalud'] >= 687971.670000 && feature.properties['gsalud'] <= 1198315.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenSalud_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.61)',
+            }
+            }
+            if (feature.properties['gsalud'] >= 1198315.000000 && feature.properties['gsalud'] <= 1987273.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenSalud_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.61)',
+            }
+            }
+        }
+        map.createPane('pane_GastoPromedioMensualenSalud_2');
+        map.getPane('pane_GastoPromedioMensualenSalud_2').style.zIndex = 402;
+        map.getPane('pane_GastoPromedioMensualenSalud_2').style['mix-blend-mode'] = 'normal';
+        var layer_GastoPromedioMensualenSalud_2 = new L.geoJson(json_GastoPromedioMensualenSalud_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GastoPromedioMensualenSalud_2',
+            onEachFeature: pop_GastoPromedioMensualenSalud_2,
+            style: style_GastoPromedioMensualenSalud_2_0,
+        });
+        bounds_group.addLayer(layer_GastoPromedioMensualenSalud_2);
+        function pop_Factorial_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['factorial'] !== null ? Autolinker.link(String(feature.properties['factorial'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Factorial_3_0(feature) {
+            if (feature.properties['factorial'] >= -2.170000 && feature.properties['factorial'] <= -0.820000 ) {
+                return {
+                pane: 'pane_Factorial_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,178,0.61)',
+            }
+            }
+            if (feature.properties['factorial'] >= -0.820000 && feature.properties['factorial'] <= 0.970000 ) {
+                return {
+                pane: 'pane_Factorial_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,204,92,0.61)',
+            }
+            }
+            if (feature.properties['factorial'] >= 0.970000 && feature.properties['factorial'] <= 3.580000 ) {
+                return {
+                pane: 'pane_Factorial_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,141,60,0.61)',
+            }
+            }
+            if (feature.properties['factorial'] >= 3.580000 && feature.properties['factorial'] <= 6.910000 ) {
+                return {
+                pane: 'pane_Factorial_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,59,32,0.61)',
+            }
+            }
+            if (feature.properties['factorial'] >= 6.910000 && feature.properties['factorial'] <= 9.680000 ) {
+                return {
+                pane: 'pane_Factorial_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,0,38,0.61)',
+            }
+            }
+        }
+        map.createPane('pane_Factorial_3');
+        map.getPane('pane_Factorial_3').style.zIndex = 403;
+        map.getPane('pane_Factorial_3').style['mix-blend-mode'] = 'normal';
+        var layer_Factorial_3 = new L.geoJson(json_Factorial_3, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Factorial_3',
+            onEachFeature: pop_Factorial_3,
+            style: style_Factorial_3_0,
+        });
+        bounds_group.addLayer(layer_Factorial_3);
+        function pop_GastoPromedioMensualenCereales_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gcereal'] !== null ? Autolinker.link(String(feature.properties['gcereal'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GastoPromedioMensualenCereales_4_0(feature) {
+            if (feature.properties['gcereal'] >= 0.000000 && feature.properties['gcereal'] <= 157960.670000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenCereales_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.61)',
+            }
+            }
+            if (feature.properties['gcereal'] >= 157960.670000 && feature.properties['gcereal'] <= 364874.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenCereales_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.61)',
+            }
+            }
+            if (feature.properties['gcereal'] >= 364874.000000 && feature.properties['gcereal'] <= 599678.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenCereales_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.61)',
+            }
+            }
+            if (feature.properties['gcereal'] >= 599678.000000 && feature.properties['gcereal'] <= 1019071.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenCereales_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.61)',
+            }
+            }
+            if (feature.properties['gcereal'] >= 1019071.330000 && feature.properties['gcereal'] <= 1788685.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenCereales_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.61)',
+            }
+            }
+        }
+        map.createPane('pane_GastoPromedioMensualenCereales_4');
+        map.getPane('pane_GastoPromedioMensualenCereales_4').style.zIndex = 404;
+        map.getPane('pane_GastoPromedioMensualenCereales_4').style['mix-blend-mode'] = 'normal';
+        var layer_GastoPromedioMensualenCereales_4 = new L.geoJson(json_GastoPromedioMensualenCereales_4, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GastoPromedioMensualenCereales_4',
+            onEachFeature: pop_GastoPromedioMensualenCereales_4,
+            style: style_GastoPromedioMensualenCereales_4_0,
+        });
+        bounds_group.addLayer(layer_GastoPromedioMensualenCereales_4);
+        function pop_GastoPromedioMensualenVerduras_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gverduras'] !== null ? Autolinker.link(String(feature.properties['gverduras'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GastoPromedioMensualenVerduras_5_0(feature) {
+            if (feature.properties['gverduras'] >= 0.000000 && feature.properties['gverduras'] <= 100515.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenVerduras_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.61)',
+            }
+            }
+            if (feature.properties['gverduras'] >= 100515.330000 && feature.properties['gverduras'] <= 225890.670000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenVerduras_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.61)',
+            }
+            }
+            if (feature.properties['gverduras'] >= 225890.670000 && feature.properties['gverduras'] <= 369948.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenVerduras_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.61)',
+            }
+            }
+            if (feature.properties['gverduras'] >= 369948.330000 && feature.properties['gverduras'] <= 587770.670000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenVerduras_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.61)',
+            }
+            }
+            if (feature.properties['gverduras'] >= 587770.670000 && feature.properties['gverduras'] <= 1112181.330000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenVerduras_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.61)',
+            }
+            }
+        }
+        map.createPane('pane_GastoPromedioMensualenVerduras_5');
+        map.getPane('pane_GastoPromedioMensualenVerduras_5').style.zIndex = 405;
+        map.getPane('pane_GastoPromedioMensualenVerduras_5').style['mix-blend-mode'] = 'normal';
+        var layer_GastoPromedioMensualenVerduras_5 = new L.geoJson(json_GastoPromedioMensualenVerduras_5, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GastoPromedioMensualenVerduras_5',
+            onEachFeature: pop_GastoPromedioMensualenVerduras_5,
+            style: style_GastoPromedioMensualenVerduras_5_0,
+        });
+        bounds_group.addLayer(layer_GastoPromedioMensualenVerduras_5);
+        function pop_GastoPromedioMensualenFrutas_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gfrutas'] !== null ? Autolinker.link(String(feature.properties['gfrutas'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GastoPromedioMensualenFrutas_6_0(feature) {
+            if (feature.properties['gfrutas'] >= 0.000000 && feature.properties['gfrutas'] <= 59375.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenFrutas_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.61)',
+            }
+            }
+            if (feature.properties['gfrutas'] >= 59375.000000 && feature.properties['gfrutas'] <= 142618.670000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenFrutas_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.61)',
+            }
+            }
+            if (feature.properties['gfrutas'] >= 142618.670000 && feature.properties['gfrutas'] <= 254624.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenFrutas_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.61)',
+            }
+            }
+            if (feature.properties['gfrutas'] >= 254624.000000 && feature.properties['gfrutas'] <= 416416.670000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenFrutas_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.61)',
+            }
+            }
+            if (feature.properties['gfrutas'] >= 416416.670000 && feature.properties['gfrutas'] <= 643568.000000 ) {
+                return {
+                pane: 'pane_GastoPromedioMensualenFrutas_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.61)',
+            }
+            }
+        }
+        map.createPane('pane_GastoPromedioMensualenFrutas_6');
+        map.getPane('pane_GastoPromedioMensualenFrutas_6').style.zIndex = 406;
+        map.getPane('pane_GastoPromedioMensualenFrutas_6').style['mix-blend-mode'] = 'normal';
+        var layer_GastoPromedioMensualenFrutas_6 = new L.geoJson(json_GastoPromedioMensualenFrutas_6, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GastoPromedioMensualenFrutas_6',
+            onEachFeature: pop_GastoPromedioMensualenFrutas_6,
+            style: style_GastoPromedioMensualenFrutas_6_0,
+        });
+        bounds_group.addLayer(layer_GastoPromedioMensualenFrutas_6);
+        function pop_NSE_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nse'] !== null ? Autolinker.link(String(feature.properties['nse'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NSE_7_0(feature) {
+            switch(String(feature.properties['nse'])) {
+                case '01_AB':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.61)',
+            }
+                    break;
+                case '02_C+':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,153,11,0.61)',
+            }
+                    break;
+                case '03_C':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,248,23,0.61)',
+            }
+                    break;
+                case '04_D+':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(48,21,255,0.61)',
+            }
+                    break;
+                case '05_D':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(81,175,189,0.61)',
+            }
+                    break;
+                case '06_E':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,203,204,0.61)',
+            }
+                    break;
+                case '07_NE':
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,203,181,0.61)',
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_NSE_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(44,123,182,0.61)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_NSE_7');
+        map.getPane('pane_NSE_7').style.zIndex = 407;
+        map.getPane('pane_NSE_7').style['mix-blend-mode'] = 'normal';
+        var layer_NSE_7 = new L.geoJson(json_NSE_7, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_NSE_7',
+            onEachFeature: pop_NSE_7,
+            style: style_NSE_7_0,
+        });
+        bounds_group.addLayer(layer_NSE_7);
+        function pop_DensidaddeAtractores_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['d_atract'] !== null ? Autolinker.link(String(feature.properties['d_atract'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DensidaddeAtractores_8_0(feature) {
+            if (feature.properties['d_atract'] >= 0.000000 && feature.properties['d_atract'] <= 0.080000 ) {
+                return {
+                pane: 'pane_DensidaddeAtractores_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.7)',
+            }
+            }
+            if (feature.properties['d_atract'] >= 0.080000 && feature.properties['d_atract'] <= 0.240000 ) {
+                return {
+                pane: 'pane_DensidaddeAtractores_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.7)',
+            }
+            }
+            if (feature.properties['d_atract'] >= 0.240000 && feature.properties['d_atract'] <= 0.510000 ) {
+                return {
+                pane: 'pane_DensidaddeAtractores_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.7)',
+            }
+            }
+            if (feature.properties['d_atract'] >= 0.510000 && feature.properties['d_atract'] <= 1.050000 ) {
+                return {
+                pane: 'pane_DensidaddeAtractores_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.7)',
+            }
+            }
+            if (feature.properties['d_atract'] >= 1.050000 && feature.properties['d_atract'] <= 2.370000 ) {
+                return {
+                pane: 'pane_DensidaddeAtractores_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.7)',
+            }
+            }
+        }
+        map.createPane('pane_DensidaddeAtractores_8');
+        map.getPane('pane_DensidaddeAtractores_8').style.zIndex = 408;
+        map.getPane('pane_DensidaddeAtractores_8').style['mix-blend-mode'] = 'normal';
+        var layer_DensidaddeAtractores_8 = new L.geoJson(json_DensidaddeAtractores_8, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_DensidaddeAtractores_8',
+            onEachFeature: pop_DensidaddeAtractores_8,
+            style: style_DensidaddeAtractores_8_0,
+        });
+        bounds_group.addLayer(layer_DensidaddeAtractores_8);
+        function pop_GradoPromedioEscolar_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grpromesc'] !== null ? Autolinker.link(String(feature.properties['grpromesc'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GradoPromedioEscolar_9_0(feature) {
+            if (feature.properties['grpromesc'] >= 0.000000 && feature.properties['grpromesc'] <= 3.710000 ) {
+                return {
+                pane: 'pane_GradoPromedioEscolar_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,0.5)',
+            }
+            }
+            if (feature.properties['grpromesc'] >= 3.710000 && feature.properties['grpromesc'] <= 8.080000 ) {
+                return {
+                pane: 'pane_GradoPromedioEscolar_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,190,165,0.5)',
+            }
+            }
+            if (feature.properties['grpromesc'] >= 8.080000 && feature.properties['grpromesc'] <= 9.860000 ) {
+                return {
+                pane: 'pane_GradoPromedioEscolar_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,112,80,0.5)',
+            }
+            }
+            if (feature.properties['grpromesc'] >= 9.860000 && feature.properties['grpromesc'] <= 11.970000 ) {
+                return {
+                pane: 'pane_GradoPromedioEscolar_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,32,32,0.5)',
+            }
+            }
+            if (feature.properties['grpromesc'] >= 11.970000 && feature.properties['grpromesc'] <= 15.010000 ) {
+                return {
+                pane: 'pane_GradoPromedioEscolar_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,0.5)',
+            }
+            }
+        }
+        map.createPane('pane_GradoPromedioEscolar_9');
+        map.getPane('pane_GradoPromedioEscolar_9').style.zIndex = 409;
+        map.getPane('pane_GradoPromedioEscolar_9').style['mix-blend-mode'] = 'normal';
+        var layer_GradoPromedioEscolar_9 = new L.geoJson(json_GradoPromedioEscolar_9, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GradoPromedioEscolar_9',
+            onEachFeature: pop_GradoPromedioEscolar_9,
+            style: style_GradoPromedioEscolar_9_0,
+        });
+        bounds_group.addLayer(layer_GradoPromedioEscolar_9);
+        function pop_DensidaddePoblacin18aosyms_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['municipio'] !== null ? Autolinker.link(String(feature.properties['municipio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['localidad'] !== null ? Autolinker.link(String(feature.properties['localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['d_18mas'] !== null ? Autolinker.link(String(feature.properties['d_18mas'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DensidaddePoblacin18aosyms_10_0(feature) {
+            if (feature.properties['d_18mas'] >= 0.000000 && feature.properties['d_18mas'] <= 10.460000 ) {
+                return {
+                pane: 'pane_DensidaddePoblacin18aosyms_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,178,0.7)',
+            }
+            }
+            if (feature.properties['d_18mas'] >= 10.460000 && feature.properties['d_18mas'] <= 26.810000 ) {
+                return {
+                pane: 'pane_DensidaddePoblacin18aosyms_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,204,92,0.7)',
+            }
+            }
+            if (feature.properties['d_18mas'] >= 26.810000 && feature.properties['d_18mas'] <= 51.520000 ) {
+                return {
+                pane: 'pane_DensidaddePoblacin18aosyms_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,141,60,0.7)',
+            }
+            }
+            if (feature.properties['d_18mas'] >= 51.520000 && feature.properties['d_18mas'] <= 84.760000 ) {
+                return {
+                pane: 'pane_DensidaddePoblacin18aosyms_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,59,32,0.7)',
+            }
+            }
+            if (feature.properties['d_18mas'] >= 84.760000 && feature.properties['d_18mas'] <= 147.930000 ) {
+                return {
+                pane: 'pane_DensidaddePoblacin18aosyms_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,0,38,0.7)',
+            }
+            }
+        }
+        map.createPane('pane_DensidaddePoblacin18aosyms_10');
+        map.getPane('pane_DensidaddePoblacin18aosyms_10').style.zIndex = 410;
+        map.getPane('pane_DensidaddePoblacin18aosyms_10').style['mix-blend-mode'] = 'normal';
+        var layer_DensidaddePoblacin18aosyms_10 = new L.geoJson(json_DensidaddePoblacin18aosyms_10, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_DensidaddePoblacin18aosyms_10',
+            onEachFeature: pop_DensidaddePoblacin18aosyms_10,
+            style: style_DensidaddePoblacin18aosyms_10_0,
+        });
+        bounds_group.addLayer(layer_DensidaddePoblacin18aosyms_10);
+        function pop_repulsor_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre_C'] !== null ? Autolinker.link(String(feature.properties['Nombre_C'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_repulsor_11_0() {
+            return {
+                pane: 'pane_repulsor_11',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,0.9)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,26,0,0.9)',
+            }
+        }
+        map.createPane('pane_repulsor_11');
+        map.getPane('pane_repulsor_11').style.zIndex = 411;
+        map.getPane('pane_repulsor_11').style['mix-blend-mode'] = 'normal';
+        var layer_repulsor_11 = new L.geoJson(json_repulsor_11, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_repulsor_11',
+            onEachFeature: pop_repulsor_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_repulsor_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_repulsor_11);
+        function pop_competidor_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre_C'] !== null ? Autolinker.link(String(feature.properties['Nombre_C'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_competidor_12_0() {
+            return {
+                pane: 'pane_competidor_12',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,197,21,1.0)',
+            }
+        }
+        map.createPane('pane_competidor_12');
+        map.getPane('pane_competidor_12').style.zIndex = 412;
+        map.getPane('pane_competidor_12').style['mix-blend-mode'] = 'normal';
+        var layer_competidor_12 = new L.geoJson(json_competidor_12, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_competidor_12',
+            onEachFeature: pop_competidor_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_competidor_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_competidor_12);
+        function pop_atractor_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre_C'] !== null ? Autolinker.link(String(feature.properties['Nombre_C'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_atractor_13_0() {
+            return {
+                pane: 'pane_atractor_13',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(7,164,49,1.0)',
+            }
+        }
+        map.createPane('pane_atractor_13');
+        map.getPane('pane_atractor_13').style.zIndex = 413;
+        map.getPane('pane_atractor_13').style['mix-blend-mode'] = 'normal';
+        var layer_atractor_13 = new L.geoJson(json_atractor_13, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_atractor_13',
+            onEachFeature: pop_atractor_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_atractor_13_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_atractor_13);
+        var baseMaps = {'Stamen Terrain': basemap0, 'OSM': basemap1};
+        L.control.layers(baseMaps,{'<img src="legend/atractor_13.png" /> atractor': layer_atractor_13,'<img src="legend/competidor_12.png" /> competidor': layer_competidor_12,'<img src="legend/repulsor_11.png" /> repulsor': layer_repulsor_11,'Densidad de Población 18 años y más<br /><table><tr><td style="text-align: center;"><img src="legend/DensidaddePoblacin18aosyms_10_0100.png" /></td><td> 0 - 10 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddePoblacin18aosyms_10_10271.png" /></td><td> 10 - 27 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddePoblacin18aosyms_10_27522.png" /></td><td> 27 - 52 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddePoblacin18aosyms_10_52853.png" /></td><td> 52 - 85 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddePoblacin18aosyms_10_851484.png" /></td><td> 85 - 148 </td></tr></table>': layer_DensidaddePoblacin18aosyms_10,'Grado Promedio Escolar<br /><table><tr><td style="text-align: center;"><img src="legend/GradoPromedioEscolar_9_040.png" /></td><td> 0 - 4 </td></tr><tr><td style="text-align: center;"><img src="legend/GradoPromedioEscolar_9_481.png" /></td><td> 4 - 8 </td></tr><tr><td style="text-align: center;"><img src="legend/GradoPromedioEscolar_9_8102.png" /></td><td> 8 - 10 </td></tr><tr><td style="text-align: center;"><img src="legend/GradoPromedioEscolar_9_10123.png" /></td><td> 10 - 12 </td></tr><tr><td style="text-align: center;"><img src="legend/GradoPromedioEscolar_9_12154.png" /></td><td> 12 - 15 </td></tr></table>': layer_GradoPromedioEscolar_9,'Densidad de Atractores<br /><table><tr><td style="text-align: center;"><img src="legend/DensidaddeAtractores_8_000000800.png" /></td><td> 0.000 - 0.080 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddeAtractores_8_008002401.png" /></td><td> 0.080 - 0.240 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddeAtractores_8_024005102.png" /></td><td> 0.240 - 0.510 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddeAtractores_8_051010503.png" /></td><td> 0.510 - 1.050 </td></tr><tr><td style="text-align: center;"><img src="legend/DensidaddeAtractores_8_105023704.png" /></td><td> 1.050 - 2.370 </td></tr></table>': layer_DensidaddeAtractores_8,'NSE<br /><table><tr><td style="text-align: center;"><img src="legend/NSE_7_01AB0.png" /></td><td>01_AB</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_02C1.png" /></td><td>02_C+</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_03C2.png" /></td><td>03_C</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_04D3.png" /></td><td>04_D+</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_05D4.png" /></td><td>05_D</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_06E5.png" /></td><td>06_E</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_07NE6.png" /></td><td>07_NE</td></tr><tr><td style="text-align: center;"><img src="legend/NSE_7_7.png" /></td><td></td></tr></table>': layer_NSE_7,'Gasto Promedio Mensual en Frutas<br /><table><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenFrutas_6_0593750.png" /></td><td> 0 - 59375 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenFrutas_6_593751426191.png" /></td><td> 59375 - 142619 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenFrutas_6_1426192546242.png" /></td><td> 142619 - 254624 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenFrutas_6_2546244164173.png" /></td><td> 254624 - 416417 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenFrutas_6_4164176435684.png" /></td><td> 416417 - 643568 </td></tr></table>': layer_GastoPromedioMensualenFrutas_6,'Gasto Promedio Mensual en Verduras<br /><table><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenVerduras_5_01005150.png" /></td><td> 0 - 100515 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenVerduras_5_1005152258911.png" /></td><td> 100515 - 225891 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenVerduras_5_2258913699482.png" /></td><td> 225891 - 369948 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenVerduras_5_3699485877713.png" /></td><td> 369948 - 587771 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenVerduras_5_58777111121814.png" /></td><td> 587771 - 1112181 </td></tr></table>': layer_GastoPromedioMensualenVerduras_5,'Gasto Promedio Mensual en Cereales<br /><table><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenCereales_4_01579610.png" /></td><td> 0 - 157961 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenCereales_4_1579613648741.png" /></td><td> 157961 - 364874 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenCereales_4_3648745996782.png" /></td><td> 364874 - 599678 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenCereales_4_59967810190713.png" /></td><td> 599678 - 1019071 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenCereales_4_101907117886854.png" /></td><td> 1019071 - 1788685 </td></tr></table>': layer_GastoPromedioMensualenCereales_4,'Factorial<br /><table><tr><td style="text-align: center;"><img src="legend/Factorial_3_22080.png" /></td><td> -2.2 - -0.8 </td></tr><tr><td style="text-align: center;"><img src="legend/Factorial_3_08101.png" /></td><td> -0.8 - 1.0 </td></tr><tr><td style="text-align: center;"><img src="legend/Factorial_3_10362.png" /></td><td> 1.0 - 3.6 </td></tr><tr><td style="text-align: center;"><img src="legend/Factorial_3_36693.png" /></td><td> 3.6 - 6.9 </td></tr><tr><td style="text-align: center;"><img src="legend/Factorial_3_69974.png" /></td><td> 6.9 - 9.7 </td></tr></table>': layer_Factorial_3,'Gasto Promedio Mensual en Salud<br /><table><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenSalud_2_0011500000.png" /></td><td> 0.0 - 115000.0 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenSalud_2_115000031249331.png" /></td><td> 115000.0 - 312493.3 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenSalud_2_312493368797172.png" /></td><td> 312493.3 - 687971.7 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenSalud_2_6879717119831503.png" /></td><td> 687971.7 - 1198315.0 </td></tr><tr><td style="text-align: center;"><img src="legend/GastoPromedioMensualenSalud_2_11983150198727334.png" /></td><td> 1198315.0 - 1987273.3 </td></tr></table>': layer_GastoPromedioMensualenSalud_2,'<img src="legend/agebs_toluca_1.png" /> agebs_toluca': layer_agebs_toluca_1,'<img src="legend/mun_toluca_0.png" /> mun_toluca': layer_mun_toluca_0,}).addTo(map);
+        map.on("zoomend", function(){
+
+            if (map.hasLayer(layer_agebs_toluca_1)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 13) {
+                    layer_agebs_toluca_1.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_agebs_toluca_1.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenSalud_2)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenSalud_2.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenSalud_2.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_Factorial_3)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_Factorial_3.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_Factorial_3.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenCereales_4)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenCereales_4.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenCereales_4.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenVerduras_5)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenVerduras_5.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenVerduras_5.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenFrutas_6)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenFrutas_6.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenFrutas_6.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_NSE_7)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_NSE_7.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_NSE_7.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_DensidaddeAtractores_8)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_DensidaddeAtractores_8.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_DensidaddeAtractores_8.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GradoPromedioEscolar_9)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GradoPromedioEscolar_9.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GradoPromedioEscolar_9.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_DensidaddePoblacin18aosyms_10)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_DensidaddePoblacin18aosyms_10.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_DensidaddePoblacin18aosyms_10.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+        });
+        setBounds();
+            if (map.hasLayer(layer_agebs_toluca_1)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 13) {
+                    layer_agebs_toluca_1.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_agebs_toluca_1.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenSalud_2)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenSalud_2.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenSalud_2.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_Factorial_3)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_Factorial_3.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_Factorial_3.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenCereales_4)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenCereales_4.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenCereales_4.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenVerduras_5)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenVerduras_5.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenVerduras_5.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GastoPromedioMensualenFrutas_6)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GastoPromedioMensualenFrutas_6.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GastoPromedioMensualenFrutas_6.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_NSE_7)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_NSE_7.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_NSE_7.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_DensidaddeAtractores_8)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_DensidaddeAtractores_8.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_DensidaddeAtractores_8.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_GradoPromedioEscolar_9)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_GradoPromedioEscolar_9.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_GradoPromedioEscolar_9.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_DensidaddePoblacin18aosyms_10)) {
+                if (map.getZoom() <= 18 && map.getZoom() >= 12) {
+                    layer_DensidaddePoblacin18aosyms_10.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_DensidaddePoblacin18aosyms_10.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+        map.addControl(new L.Control.Search({
+            layer: layer_agebs_toluca_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'localidad'}));
+        </script>
+    </body>
+</html>
